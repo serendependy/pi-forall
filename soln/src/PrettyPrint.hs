@@ -200,6 +200,7 @@ wrapf f = case f of
   Paren _       -> id
   Pos _ a       -> wrapf a
   TrustMe _     -> id
+  PrintMe _     -> id
   _             -> parens
 
 -- deciding whether to add parens to the arg of an application
@@ -376,6 +377,10 @@ instance Display Term where
   display (TrustMe ma)  = do
     da <- display ma 
     return $ text "TRUSTME" <+> da
+    
+  display (PrintMe ma) = do
+    da <- display ma
+    return $ text "PRINTME" <+> da
     
   display (Sigma bnd) = 
     lunbind bnd $ \ ((x,unembed->tyA),tyB) -> do

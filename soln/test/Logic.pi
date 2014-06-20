@@ -15,11 +15,14 @@ proj2 = \ [A] [B] p . case p of
   Conj x y -> y
 
 and_comm : [A : Type] -> [B : Type] -> And A B -> And B A
-and_comm = TRUSTME
+and_comm = \ [A] [B] anb . case anb of
+  Conj x y -> Conj y x
             
 
 and_assoc : [A : Type] -> [B : Type] -> [C : Type] -> And A (And B C) -> And (And A B) C
-and_assoc = TRUSTME
+and_assoc = \ [A] [B] [C] assocp . case assocp of
+  Conj x zy -> case zy of
+    Conj z y -> PRINTME
 
 -- if and only if
 -----------------
